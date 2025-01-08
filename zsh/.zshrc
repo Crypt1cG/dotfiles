@@ -151,3 +151,6 @@ eval "$(atuin init zsh --disable-up-arrow)"
 
 # Created by `pipx` on 2024-07-24 22:30:17
 export PATH="$PATH:/home/neven/.local/bin"
+
+# enable vim keybinds
+bindkey -v
