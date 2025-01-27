@@ -1,5 +1,3 @@
-set number
-
 " load plugin file
 lua require('plugins')
 
@@ -48,3 +46,6 @@ set pumheight=10
 set conceallevel=0
 " use zathura for viewing pdfs from latex
 let g:vimtex_view_method='zathura'
+
+" should make it so vim stops adding newlines to the end of like every file ever
+set nofixeol

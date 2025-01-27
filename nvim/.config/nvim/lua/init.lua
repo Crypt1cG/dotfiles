@@ -417,3 +417,7 @@ dap.configurations.cpp = {
 --}
 
 require("dapui").setup()
+
+-- Line numbers
+vim.opt.number = true
+vim.opt.relativenumber = true

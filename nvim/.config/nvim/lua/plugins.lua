@@ -68,4 +68,7 @@ return require('packer').startup(function(use)
 
 	-- vim practice game
 	use { 'ThePrimeagen/vim-be-good' }
+
+	-- for auto-detecting which indentation style to use
+	use { 'tpope/vim-sleuth' }
 end)
