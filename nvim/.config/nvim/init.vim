@@ -1,5 +1,5 @@
 " load plugin file
-lua require('plugins')
+" lua require('plugins')
 
 " main lua init thing
 lua require('init')

@@ -1,3 +1,14 @@
+-- install lazy.nvim if not installed
+require("config.lazy")
+
+-- disable netrw (for nvim-tree)
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
+-- improves colors I think
+vim.opt.termguicolors = true
+
+--[[
 -- lualine stuff
 require('lualine').setup {
   options = {
@@ -214,9 +225,11 @@ vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
 vim.keymap.set('n', '<leader>gs', builtin.git_status, {})
 -- Disable folding in Telescope's result window.
-vim.api.nvim_create_autocmd("FileType", { pattern = "TelescopeResults", command = [[setlocal nofoldenable]] })
+--]]
+-- vim.api.nvim_create_autocmd("FileType", { pattern = "TelescopeResults", command = [[setlocal nofoldenable]] })
 
 -- git thing
+--[[
 require('gitsigns').setup()
 
 -- cmake thing
@@ -417,7 +430,8 @@ dap.configurations.cpp = {
 --}
 
 require("dapui").setup()
-
+--]]
 -- Line numbers
 vim.opt.number = true
 vim.opt.relativenumber = true
+
