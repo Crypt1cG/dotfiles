@@ -17,17 +17,24 @@ if [ -f "/home/neven/miniforge3/etc/profile.d/mamba.sh" ]; then
 fi
 # <<< conda initialize <<<
 
-cd ~/catkin_ws/src/mrover
-mamba activate ros_env
-source ~/catkin_ws/devel/setup.zsh
-
-# cd ~/ros2_ws/src/mrover
-# mamba activate ros2_env
-# readonly CATKIN_WORKSPACE_PATH=~/ros2_ws
-# #source /opt/
-# readonly CATKIN_SETUP_PATH=${CATKIN_WORKSPACE_PATH}/install/setup.zsh
-# if [ -f ${CATKIN_SETUP_PATH} ]; then
-# 	source ${CATKIN_SETUP_PATH}
-# fi
-
+# check additional arguments to script
+if [[ $1 == "ros1" ]]; then
+	echo "ROS1"
+	cd ~/new_catkin_ws/src/mrover
+	mamba activate ros_env
+	source ~/new_catkin_ws/devel/setup.zsh
+else
+	echo "ROS2"
+	cd ~/ros2_ws/src/mrover
+	mamba activate ros2_env
+	readonly CATKIN_WORKSPACE_PATH=~/ros2_ws
+	#source /opt/
+	readonly CATKIN_SETUP_PATH=${CATKIN_WORKSPACE_PATH}/install/setup.zsh
+	if [ -f ${CATKIN_SETUP_PATH} ]; then
+		source ${CATKIN_SETUP_PATH}
+	fi
+	# for autocomplete
+	eval "$(register-python-argcomplete ros2)"
+	eval "$(register-python-argcomplete colcon)"
+fi
 #alias clang++-18="clang++"
