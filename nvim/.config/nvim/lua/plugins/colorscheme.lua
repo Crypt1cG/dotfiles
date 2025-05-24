@@ -30,4 +30,12 @@ return {
 		"NLKNguyen/papercolor-theme",
 		name = "papercolor",
 	},
+
+	{
+		"rebelot/kanagawa.nvim",
+	},
+
+	{
+		"sainnhe/everforest",
+	},
 }

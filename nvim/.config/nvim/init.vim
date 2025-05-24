@@ -46,6 +46,8 @@ set pumheight=10
 set conceallevel=0
 " use zathura for viewing pdfs from latex
 let g:vimtex_view_method='zathura'
+" fix highlight stuff in zathura
+let g:vimtex_view_forward_search_on_start='false'
 
 " should make it so vim stops adding newlines to the end of like every file ever
 set nofixeol

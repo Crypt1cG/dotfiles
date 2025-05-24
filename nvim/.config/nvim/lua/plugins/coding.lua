@@ -109,4 +109,19 @@ return {
 	{
 		"micangl/cmp-vimtex"
 	},
+
+	-- auto-detect which indentation style to use
+	{
+		"tpope/vim-sleuth"
+	},
+
+	-- markdown preview
+	{
+		"OXY2DEV/markview.nvim",
+		lazy = false,
+		-- gives some nicer icons, not actually necessary
+		dependencies = {
+			"echasnovski/mini.icons",
+		},
+	},
 }

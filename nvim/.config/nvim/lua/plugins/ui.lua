@@ -61,7 +61,9 @@ return {
 	-- git thing on the side (gutter?)
 	{
 		"lewis6991/gitsigns.nvim",
-		config = true,
+		opts = {
+			current_line_blame = true,
+		}
 	},
 
 	-- telescope
