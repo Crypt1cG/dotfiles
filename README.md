@@ -1,4 +1,4 @@
-# My Dotfiles Repo
+# The Best Dotfiles
 
 ## Usage:
 
@@ -8,8 +8,8 @@
 
 Example:
 ```bash
-cd
-git clone https://github.com/Crypt1cG/dotfiles.git
-cd dotfiles
-stow nvim
+$ cd
+$ git clone https://github.com/Crypt1cG/dotfiles.git
+$ cd dotfiles
+$ stow nvim
 ```
