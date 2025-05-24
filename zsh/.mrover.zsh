@@ -30,6 +30,8 @@ else
 	readonly CATKIN_WORKSPACE_PATH=~/ros2_ws
 	#source /opt/
 	readonly CATKIN_SETUP_PATH=${CATKIN_WORKSPACE_PATH}/install/setup.zsh
+	export XDG_SESSION_TYPE=x11
+	export ROS_DOMAIN_ID=5
 	if [ -f ${CATKIN_SETUP_PATH} ]; then
 		source ${CATKIN_SETUP_PATH}
 	fi
