@@ -13,14 +13,25 @@
 # monitor=eDP-1,2560x1600@60,0x0,1.25
 # built-in display - play around with final number (transform)
 # 0 = normal, 1 = vertical, 2 = upside down, etc (this gets changed by the rotation guy)
-monitor=eDP-1,2560x1600@144,1920x1440,1.25,transform,0
+monitor=eDP-1,2560x1600@60,1920x1440,1.25,transform,0
 # external monitors
 # Samsung monitor
 #monitor=DP-1,2560x1440@240,2048x0,1
-monitor=DP-3,2560x1440@240,1920x0,1
+#monitor=DP-3,2560x1440@240,1920x0,1
+monitor=desc:Samsung Electric Company LC27G7xT H4ZNA03230,2560x1440@144,1920x0,1
+#monitor=DP-5,2560x1440@240,1920x0,1
 # Acer Monitor (when on DP-3??)
 #monitor=DP-3,1920x1080@144,2048x0,1
-monitor=DP-1,1920x1080@60,0x0,1
+#monitor=DP-1,1920x1080@60,0x0,1
+#monitor=DP-4,1920x1080@60,0x0,1
+monitor=desc:Acer Technologies Acer KG241 P 0x83704D16,1920x1080@144,1920x360,1
+
+# screensharing fix? https://wiki.hyprland.org/Useful-Utilities/Screen-Sharing/
+windowrulev2 = opacity 0.0 override,class:^(xwaylandvideobridge)$
+windowrulev2 = noanim,class:^(xwaylandvideobridge)$
+windowrulev2 = noinitialfocus,class:^(xwaylandvideobridge)$
+windowrulev2 = maxsize 1 1,class:^(xwaylandvideobridge)$
+windowrulev2 = noblur,class:^(xwaylandvideobridge)$
 
 
 # See https://wiki.hyprland.org/Configuring/Keywords/ for more
@@ -30,19 +41,33 @@ monitor=DP-1,1920x1080@60,0x0,1
 
 # Source a file (multi-file configs)
 # source = ~/.config/hypr/myColors.conf
+source = ~/.config/hypr/current_theme.conf
 
 # Some default env vars.
 env = XCURSOR_SIZE,24
 
 # Tell hyprland to use Intel gpu
-# env = WLR_DRM_DEVICES,/dev/dri/card0:/dev/dri/card1
+# NOTE: doing this prevents external monitor plugged into nvidia gpu from working
+#env = WLR_DRM_DEVICES,$HOME/.config/hypr/intel-card
+#env = AQ_DRM_DEVICES,/dev/dri/card1:/dev/dri/card0
+env = AQ_DRM_DEVICES,/dev/dri/card1
+
+debug {
+	overlay = false
+}
+
+cursor {
+	no_hardware_cursors = true
+# 	no_break_fs_vrr = true
+# 	min_refresh_rate = 60
+}
 
 # For all categories, see https://wiki.hyprland.org/Configuring/Variables/
 input {
     kb_layout = us
     kb_variant = 
     kb_model =
-    kb_options =
+    kb_options = compose:rctrl
     kb_rules =
 
     follow_mouse = 1
@@ -77,8 +102,10 @@ general {
     gaps_in = 5
     gaps_out = 20
     border_size = 2
-    col.active_border = rgba(33ccffee) rgba(00ff99ee) 45deg
-    col.inactive_border = rgba(595959aa)
+    # col.active_border = rgba(33ccffee) rgba(00ff99ee) 45deg
+    col.active_border = $border_1 $border_2 45deg
+    # col.inactive_border = rgba(595959aa)
+	col.inactive_border = $inactive_border
 
     layout = dwindle
 	
@@ -97,15 +124,16 @@ decoration {
 
     blur {
         enabled = yes
-        size = 3
+        size = 7
         passes = 1
         new_optimizations = on
     }
 
-    drop_shadow = yes
-    shadow_range = 4
-    shadow_render_power = 3
-    col.shadow = rgba(1a1a1aee)
+	shadow {
+		enabled = true
+		range = 4
+		render_power = 3
+	}
 }
 
 animations {
@@ -132,7 +160,7 @@ dwindle {
 
 master {
     # See https://wiki.hyprland.org/Configuring/Master-Layout/ for more
-    new_is_master = true
+    #new_is_master = true
 }
 
 gestures {
@@ -142,14 +170,15 @@ gestures {
 
 misc {
     # groupbar_titles_font_size = 12
-	# force_default_wallpaper = -1
+	force_default_wallpaper = 0
     # disable_hyprland_logo = true
 	# variable refresh rate thing??
-	# vfr = true
+	vfr = true
 	# this is more variable refresh rate stuff (but I think it's causing
 	# crashing with nvidia gpu)
-	#vrr = 2
-	no_direct_scanout = yes
+	vrr = 0
+	#no_direct_scanout = true
+	render_ahead_of_time = false
 }
 
 # Example per-device config
@@ -166,10 +195,24 @@ misc {
 # See https://wiki.hyprland.org/Configuring/Window-Rules/ for more
 # enable screen tearing for cs2
 #windowrulev2 = immediate, class:^(cs2)$
+#windowrulev2 = immediate, class:^(brave-browser)$
 
 # it seems better to use kitty's built in background-opacity because then text
 # doesn't turn transparent too (easier to read)
 # windowrulev2 = opacity 0.8 override 0.7 override,class:^(kitty)$
+windowrulev2 = opacity 0.9 override 0.8 override, class:^(thunar)$
+windowrule = float, ^(thunar)$
+#windowrule = size 1000 600, ^(thunar)$
+
+windowrulev2 = opacity 0.9 override 0.8 override, class: ^(xdg-desktop-portal-gtk)$
+windowrule = float, ^(xdg-desktop-portal-gtk)$
+windowrule = size 1000 600, ^(xdg-desktop-portal-gtk)$
+
+windowrulev2 = opacity 0.95 override 0.8 override, class: ^(qalculate-gtk)$
+windowrule = float, ^(qalculate-gtk)$
+windowrule = size 1000 800, ^(qalculate-gtk)$
+
+windowrulev2 = opacity 0.95 override 0.9 override, class:^(org.pwmt.zathura)$
 
 # See https://wiki.hyprland.org/Configuring/Keywords/ for more
 # NOTE: the following doesn't work anymore
@@ -181,8 +224,12 @@ bind = $mainMod SHIFT, Q, killactive,
 bind = $mainMod, M, exit, 
 bind = $mainMod, E, exec, dolphin
 bind = $mainMod, V, togglefloating, 
-bind = $mainMod, D, exec, wofi --show drun -i -I
-#bind = $mainMod, D, exec, rofi -show combi
+#bind = $mainMod, D, exec, wofi --show drun -i -I
+# could add "window" to modes to switch windows (currently broken)
+# everything
+bind = $mainMod, D, exec, rofi -show combi
+# just command thing
+bind = $mainMod, R, exec, rofi -show run -no-show-icons
 bind = $mainMod, P, pseudo, # dwindle
 bind = $mainMod, J, togglesplit, # dwindle
 
@@ -235,8 +282,8 @@ bind =, XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
 bind =, XF86AudioMicMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle
 
 # Brightness keys
-binde=, XF86MonBrightnessUp, exec, brightnessctl set 5%+
-binde=, XF86MonBrightnessDown, exec, brightnessctl set 5%-
+binde=, XF86MonBrightnessUp, exec, brightnessctl set -d intel_backlight 5%+
+binde=, XF86MonBrightnessDown, exec, brightnessctl set -d intel_backlight 5%-
 # swayosd gives a nice on-screen-display
 # binde=, XF86MonBrightnessUp, exec, swayosd --brightness raise
 # binde=, XF86MonBrightnessDown, exec, swayosd --brightness lower
@@ -254,20 +301,32 @@ bind = $mainMod, X, changegroupactive, f
 bind = $mainMod, F, fullscreen
 
 # screenshot thing should bind this to fn+F6 but idk what the thing is called
-bind = SHIFT, F6, exec, grim -g "$(slurp)" - | swappy -f -
+# turns out it actually produces win+shift+S
+#bind = SHIFT, F6, exec, grim -g "$(slurp)" - | swappy -f -
+bind = $mainMod SHIFT, S, exec, hyprshot -m region -o Pictures/Screenshots
 
 # pause/play keys
-bind =, XF86AudioPlay, exec, playerctl pause
-bind =, XF86AudioPause, exec, playerctl play
+bind =, XF86AudioPlay, exec, playerctl play-pause
+bind =, XF86AudioPause, exec, playerctl play-pause
 
 # start waybar
-exec-once=waybar
+#exec-once=waybar
+#exec-once=ags
 
 # start screen rotation thing
 exec-once=iio-hyprland
 
 # fix cursor stuff (I think)
-exec-once=hyprctl setcursor Adwaita 30
+#exec-once=hyprctl setcursor Adwaita 28
 
 # network manager applet
 exec-once=nm-applet
+
+# bluetooth applet
+exec-once=blueman-applet
+
+# authentication thing
+exec-once=/usr/lib/polkit-kde-authentication-agent-1
+
+# wallpaper stuff
+exec-once=hyprpaper
