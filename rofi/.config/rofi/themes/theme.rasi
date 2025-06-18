@@ -1,0 +1,97 @@
+/**
+ * see https://github.com/davatorium/rofi/blob/next/doc/rofi-theme.5.markdown
+ * for details on configuring
+ **/
+
+@import "colorschemes/current_theme.rasi"
+
+* {
+    selected-foreground:    var(background);
+    selected-background:    var(foreground);
+    border-color:           var(foreground);
+    background-color:       transparent;
+    text-color:		    var(foreground);
+}
+
+element {
+    padding: 5px ;
+    margin: 2px;
+    cursor:  pointer;
+    spacing: 5px ;
+    border:  0;
+    border-radius: 10px;
+}
+
+element selected {
+    background-color: var(selected-background);
+}
+
+element-text {
+    cursor:           inherit;
+}
+
+element-text selected {
+    cursor:           inherit;
+    text-color:       var(selected-foreground);
+}
+
+element-icon {
+    size:             1.0000em ;
+    cursor:           inherit;
+}
+
+window {
+    padding:          1em;
+    background-color: var(background);
+    border:           2px;
+    border-radius:	  20px;
+    width: 35%;
+    font: "JetBrainsMono NFM SemiBold 13";
+}
+
+// this holds like calculator output
+message {
+    padding:      5px ;
+    border: 1px;
+    border-radius: 10px;
+}
+
+listview {
+    padding:      10px 0px 0px ;
+    spacing:      2px ;
+    fixed-height: 0;
+}
+
+num-filtered-rows {
+    expand:     false;
+    text-color: Gray;
+}
+
+num-rows {
+    expand:     false;
+    text-color: Gray;
+}
+
+textbox-num-sep {
+    expand:     false;
+    str:        "/";
+    text-color: Gray;
+}
+
+inputbar {
+    padding:    0px 0px 8px ;
+    spacing:    0px ;
+    children:   [ "prompt", "textbox-prompt-colon", "entry", "num-filtered-rows", "textbox-num-sep", "num-rows" ];
+}
+
+entry {
+    cursor:            text;
+    placeholder-color: Gray;
+    placeholder:       "Type to filter";
+}
+
+textbox-prompt-colon {
+    margin:     0px 0.3000em 0.0000em 0.0000em ;
+    expand:     false;
+    str:        ":";
+}

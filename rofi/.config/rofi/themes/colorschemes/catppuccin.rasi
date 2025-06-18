@@ -1,0 +1,5 @@
+/* catppuccin mocha */
+* {
+    foreground:	rgba(180, 190, 254, 100%);
+    background: rgba(30, 30, 46, 80%);
+}
