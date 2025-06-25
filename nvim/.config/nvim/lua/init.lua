@@ -8,6 +8,39 @@ vim.g.loaded_netrwPlugin = 1
 -- improves colors I think
 vim.opt.termguicolors = true
 
+local signs = {
+	ERROR = "",
+	WARN = "",
+	HINT = "",
+	INFO = ""
+}
+
+vim.diagnostic.config({
+	float = {
+		header = "Diagnostics: (gra for actions)",
+		border = "rounded",
+		focusable = false,
+	},
+	signs = {
+		text = {
+			[vim.diagnostic.severity.ERROR] = signs.ERROR,
+			[vim.diagnostic.severity.WARN] = signs.WARN,
+			[vim.diagnostic.severity.HINT] = signs.HINT,
+			[vim.diagnostic.severity.INFO] = signs.INFO,
+		},
+	},
+	severity_sort = true,
+})
+
+-- seems to be the cleanest way to set rounded borders in all floating lsp windows
+-- got from here: https://github.com/ofseed/nvim/blob/91484d1a7a8d01f8ee9c792f3fcd9a96232a4cf1/lua/lsp.lua#L25-L32 and some other place I think
+local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
+function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
+	opts = opts or {}
+	opts.border = opts.border or "rounded"
+	return orig_util_open_floating_preview(contents, syntax, opts, ...)
+end
+
 --[[
 -- lualine stuff
 require('lualine').setup {

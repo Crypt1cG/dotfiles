@@ -16,6 +16,7 @@ hi NormalSB guibg=NONE
 " this is for nvimtree (file explorer)
 hi NvimTreeNormal guibg=NONE
 hi NvimTreeNormalNC guibg=NONE
+hi NormalFloat guibg=NONE
 
 " Tab setup - use tab character, visible width = 4 spaces
 " Not sure if all of these are needed, copied from my vim conf

@@ -66,6 +66,10 @@ return {
 					{ name = 'nvim_lsp' },
 					--{ name = 'luasnip' }
 				},
+				window = {
+					documentation = cmp.config.window.bordered(),
+					completion = cmp.config.window.bordered(),
+				},
 			}
 			cmp.setup.filetype("tex", {
 				sources = {
@@ -76,7 +80,7 @@ return {
 			})
 		end
 	},
-	
+
 	-- more nvim-cmp
 	-- TODO: look into this - is this actually good?
 	{
@@ -96,7 +100,16 @@ return {
 					capabilities = capabilities,
 				}
 			end
-		end
+		end,
+		opts = {
+			ui = {
+				windows = {
+					default_options = {
+						border = "rounded",
+					},
+				},
+			},
+		},
 	},
 
 	-- latex support
